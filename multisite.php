@@ -226,7 +226,7 @@ function multisite_civicrm_selectWhereClause($entity, &$clauses) {
   if (!$isEnabled || !$groupID) {
     return;
   }
-  if (!CRM_Core_Permission::check('list all groups in domain') && !_multisite_add_permissions($type)) {
+  if (!CRM_Core_Permission::check('list all groups in domain') && !_multisite_add_permissions(NULL)) {
     return;
   }
   $currentGroups = _multisite_get_all_child_groups($groupID, FALSE);
@@ -495,7 +495,7 @@ function _multisite_add_permissions($type) {
     // & default to applying this to all
     return TRUE;
   }
-  if ($type == 'group') {
+  if (strtolower($type) == 'group') {
     // @fixme only handling we have for this at the moment
     return TRUE;
   }
